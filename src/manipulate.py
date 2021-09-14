@@ -10,7 +10,7 @@ import fileinput
 import subprocess
 import shutil
 
-rootDirURL="/home/chyper/application_bot/src/files/"
+rootDirURL="ApplicationBot/src/files/"
 
 tmpDir="~odt_contents"
 tmpDirURL=rootDirURL+"/"+tmpDir
