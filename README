@@ -1,0 +1,19 @@
+Description:
+This project is designed to automate the Indeed application process.
+In src/files/	there is a odt document called "input_cover_letter.odt".
+This is where your cover letter text will be copied into.
+Then, anywhere in the cover letter you mention the job title you are applying to
+or the company you are applying to, you will need to replace them with [job title] and [company name] respectively.
+The python script will replace [job title] and [company name] with what is specified in the manipulate.py script.
+Then, it will create an output .odt document and output .pdf document.
+
+Requirments:
+-libreoffice
+-python
+
+TODO:
+-create bot object with silenium web driver to spider walk indeed easy apply jobs
+-create method inside bot object to select job title and company name from job description and
+feed those into manipulate.py as arguments
+-create list of commonly asked questions for indeed employer questions
+-automate the rest with selenium webdriver

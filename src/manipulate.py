@@ -7,23 +7,28 @@
 import os
 import zipfile
 import fileinput
+import subprocess
+import shutil
 
 rootDirURL="/home/chyper/application_bot/src/files/"
 
 tmpDir="~odt_contents"
 tmpDirURL=rootDirURL+"/"+tmpDir
 
-zipSourceFile="input.odt"
+zipSourceFile="input_cover_letter.odt"
 zipSourceFileURL=rootDirURL+"/"+zipSourceFile
 
-zipOutFile="BrennanCoverLetter.odt"
+zipOutFile="output_cover_letter.odt"
 zipOutFileURL=rootDirURL+"/"+zipOutFile
 
 xmlFile="content.xml"
 xmlFileURL=tmpDirURL+"/"+xmlFile
 
-token="Cloud and DevOps Infrastructure Analyst"
-replacement="TEST SUCCESSFUL"
+token1="[job title]"
+replacement1="Automation Engineer"
+
+token2="[company name]"
+replacement2="SpaceX"
 
 #
 # Unzip ODT
@@ -41,7 +46,10 @@ print (" -- Replacing -------------")
 print (xmlFileURL)
 
 for line in fileinput.input(xmlFileURL, inplace=1):
-    print (line.replace(token,replacement))
+    print (line.replace(token1,replacement1))
+
+for line in fileinput.input(xmlFileURL, inplace=1):
+    print (line.replace(token2,replacement2))
 
 # Zip contents of the temporary directory to ODT
 # Use file list from the original archive
@@ -57,3 +65,7 @@ with zipfile.ZipFile(zipOutFileURL, 'w') as outzip:
         fileName=zipinfo.filename # The name and path as stored in the archive
         fileURL=tmpDirURL+"/"+fileName # The actual name and path
         outzip.write(fileURL,fileName)
+
+### covert odt document to pdf
+input_filename = 'output_cover_letter.odt'
+subprocess.call(f'cd files;libreoffice --headless --convert-to pdf {input_filename}', shell=True)
